@@ -158,7 +158,15 @@ function Play() {
 
       return true;
     },
-    [isTimeEnabled, whiteTime, blackTime, game, settings.difficulty]
+    [
+      isTimeEnabled,
+      whiteTime,
+      blackTime,
+      game,
+      settings.difficulty,
+      settings.playerColor,
+      t,
+    ]
   );
 
   const handleNewGame = () => {
