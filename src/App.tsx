@@ -15,7 +15,6 @@ export default function App() {
         <div className="px-4 py-1 flex justify-between gap-4 border-b">
           <a href="/" className="flex items-center gap-2">
             <img src="/bk.png" alt="Chess AI Logo" className="w-12 h-12" />
-            <p>Chess AI</p>
           </a>
           <div className="flex items-center gap-2 justify-end">
             <ThemeToggle />

@@ -1,44 +1,84 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-i18n
-  // pass the i18n instance to react-i18next.
-  .use(initReactI18next)
-  // init i18next
-  // for all options read: https://www.i18next.com/overview/configuration-options
-  .init({
-    fallbackLng: "en",
-    debug: true,
-    resources: {
-      en: {
-        translation: {
-          welcome: "Welcome to the Chess Game",
-          play: "Play",
-          settings: "Settings",
-          about: "About",
-          newGame: "New Game",
-          opponent: "Opponent",
-          player: "Player",
-          vs: "vs",
-          move: "Move",
-          gameOver: "Game Over",
+i18n.use(initReactI18next).init({
+  fallbackLng: "en",
+  debug: true,
+  resources: {
+    en: {
+      translation: {
+        title: "Chess AI",
+        welcomeMessage: "Hello, try to beat the AI in a game of chess",
+        play: "Play",
+        settings: "Settings",
+        about: "About",
+        newGame: "New Game",
+        opponent: "Opponent",
+        player: "Player",
+        vs: "vs",
+        move: "Move",
+        gameOver: "Game Over",
+        gameDifficulty: "Difficulty",
+        draw: "Draw",
+        gameDrawn: "The game ended in a draw",
+        you: "You",
+        time: "Time",
+        color: "Color",
+        white: "White",
+        black: "Black",
+        checkmate: "Checkmate",
+        youWin: "You win by checkmate",
+        youLose: "You lose by checkmate",
+        moves: "Moves",
+        difficulty: {
+          easy: "Easy",
+          medium: "Medium",
+          hard: "Hard",
         },
-      },
-      mn: {
-        translation: {
-          welcome: "Шатарын тоглоомд тавтай морил",
-          play: "Тоглох",
-          settings: "Тохиргоо",
-          about: "Тухай",
-          newGame: "Шинэ тоглоом",
-          opponent: "Өрсөлдөгч",
-          player: "Тоглогч",
-          vs: "vs",
-          move: "Алхам",
-          gameOver: "Тоглоом дууссан",
-        },
+        noTime: "No Time Limit",
+        "3min": "3 Minutes",
+        "10min": "10 Minutes",
+        noMovesYet:
+          "No moves made yet, the game will start once you make a move",
       },
     },
-  });
+    mn: {
+      translation: {
+        title: "AI Шатар",
+        welcomeMessage: "",
+        play: "Тоглох",
+        settings: "Тохиргоо",
+        about: "Тухай",
+        newGame: "Шинэ өрөг",
+        opponent: "Өрсөлдөгч",
+        player: "Тоглогч",
+        vs: "vs",
+        move: "Алхам",
+        gameOver: "Тоглоом дууссан",
+        gameDifficulty: "Хүндрэл",
+        you: "Тоглогч",
+        time: "Цаг",
+        color: "Өнгө",
+        white: "Цагаан",
+        black: "Хар",
+        checkmate: "Мад",
+        youWin: "Та яллаа",
+        youLose: "Та ялагдлаа",
+        draw: "Тэнцлээ",
+        gameDrawn: "Өрөг тэнцлээ",
+        moves: "Нүүдлүүд",
+        difficulty: {
+          easy: "Амархан",
+          medium: "Дунд",
+          hard: "Хэцүү",
+        },
+        noTime: "Цагийн хязгааргүй",
+        "3min": "3 Минут",
+        "10min": "10 Минут",
+        noMovesYet: "Нүүдэл хийгээгүй байна, нүүдэл хийснээр өрөг эхэлнэ",
+      },
+    },
+  },
+});
 
 export default i18n;

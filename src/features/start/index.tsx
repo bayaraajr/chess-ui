@@ -17,7 +17,8 @@ export default function Start() {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-4">
       <img src="/bq.png" alt={t("logoAlt")} className="w-32 h-32 mb-6" />
-      <h1 className="text-4xl font-bold mb-4">{t("welcomeMessage")}</h1>
+      <h1 className="text-4xl font-bold">{t("welcomeMessage")}</h1>
+      <p className="text-sm mb-4">{t("description")}</p>
       <div>
         <Tabs
           value={settings.difficulty}
@@ -40,9 +41,9 @@ export default function Start() {
           }
         >
           <TabsList>
-            <TabsTrigger value="3min">{t("timeControl.3min")}</TabsTrigger>
-            <TabsTrigger value="10min">{t("timeControl.10min")}</TabsTrigger>
-            <TabsTrigger value="no-time">{t("timeControl.noTime")}</TabsTrigger>
+            <TabsTrigger value="3min">{t("3min")}</TabsTrigger>
+            <TabsTrigger value="10min">{t("10min")}</TabsTrigger>
+            <TabsTrigger value="no-time">{t("noTime")}</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -72,9 +73,14 @@ export default function Start() {
         </Tabs>
       </div>
       <div className="flex items-center space-x-2">
-        <Button onClick={() => navigate("/play")}>{t("playButton")}</Button>
+        <Button onClick={() => navigate("/play")}>{t("play")}</Button>
       </div>
-      <p className="text-xs mt-8">{t("footerMessage")}</p>
+      <p className="text-xs mt-8">
+        {t("createdBy")}{" "}
+        <a target="_blank" href="https://instagram.com/bayarjargal.j">
+          @bayarjargal.jr
+        </a>
+      </p>
     </div>
   );
 }

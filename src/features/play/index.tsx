@@ -100,8 +100,11 @@ function Play() {
     if (!isTimeEnabled) return;
 
     if (whiteTime === 0 || blackTime === 0) {
-      alert(
-        `${whiteTime === 0 ? t("white") : t("black")} ${t("ranOutOfTime")}`
+      toast.warning(
+        `${whiteTime === 0 ? t("white") : t("black")} ${t("ranOutOfTime")}`,
+        {
+          position: "top-center",
+        }
       );
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
@@ -121,6 +124,7 @@ function Play() {
       if (tempGame.isGameOver()) {
         if (tempGame.isCheckmate()) {
           toast.success(t("checkmate"), {
+            position: "top-center",
             description:
               tempGame.turn() === (settings.playerColor as Color)
                 ? t("youLose")
@@ -128,6 +132,7 @@ function Play() {
           });
         } else {
           toast.warning(t("draw"), {
+            position: "top-center",
             description: t("gameDrawn"),
           });
         }
@@ -230,7 +235,11 @@ function Play() {
           <AvatarImage src={avatarSrc} />
         </Avatar>
         <div>
-          <p className="text-sm font-medium">{label}</p>
+          <p className="text-sm font-medium">
+            {label}
+            {label === t("opponent") &&
+              `(${t(`difficulty.${settings.difficulty}`)})`}
+          </p>
           <p className="text-xs text-muted-foreground">{formatTime(time)}</p>
         </div>
       </div>
@@ -257,14 +266,21 @@ function Play() {
         <div className="col-span-full md:col-span-1 order-last md:order-none">
           <p className="text-sm font-semibold mb-2">{t("moves")}</p>
           <ScrollArea className="h-[200px] w-[350px]">
+            {moves.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full">
+                <p className="text-xs text-muted-foreground">
+                  {t("noMovesYet")}
+                </p>
+              </div>
+            )}
             {moves.map((move, idx) => (
               <Badge
                 onClick={() => handleMoveClick(idx)}
                 variant="secondary"
                 className={
                   currentMoveIndex === idx + 1
-                    ? "bg-blue-500 text-white dark:bg-blue-600 cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
-                    : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600"
+                    ? "bg-blue-500 text-white dark:bg-blue-600 cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700 m-[1px]"
+                    : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-300 m-[1px] dark:hover:bg-gray-600"
                 }
               >
                 {move}
@@ -272,24 +288,25 @@ function Play() {
             ))}
           </ScrollArea>
         </div>
+        <Separator />
 
         <div className="flex justify-evenly items-center gap-4 mb-4">
-          {renderPlayer(t("opponent"))}
-          <div className="text-center font-bold">{t("vs")}</div>
           {renderPlayer(t("you"))}
+          <div className="text-center font-bold">{t("vs")}</div>
+          {renderPlayer(t("opponent"))}
         </div>
 
         <div className="border-t pt-3">
           <p className="text-sm font-semibold mb-1">{t("settings")}</p>
           <ul className="text-xs text-muted-foreground space-y-1">
             <li>
-              🎯 {t("difficulty")}: {settings.difficulty}
+              🎯 {t("gameDifficulty")}: {t(`difficulty.${settings.difficulty}`)}
             </li>
             <li>
-              🎨 {t("color")}: {settings.playerColor}
+              🎨 {t("color")}: {t(settings.playerColor)}
             </li>
             <li>
-              ⏱️ {t("time")}: {settings.timeControl}
+              ⏱️ {t("time")}: {t(settings.timeControl)}
             </li>
           </ul>
         </div>
@@ -307,7 +324,7 @@ function Play() {
                     alt={t("chessAILogo")}
                     className="w-32 h-32 mb-6"
                   />
-                  <h1 className="text-4xl font-bold mb-4">{t("chessAI")}</h1>
+                  <h1 className="text-4xl font-bold mb-4">{t("title")}</h1>
 
                   {/* Difficulty */}
                   <Tabs
@@ -320,9 +337,15 @@ function Play() {
                     }
                   >
                     <TabsList>
-                      <TabsTrigger value="easy">{t("easy")}</TabsTrigger>
-                      <TabsTrigger value="medium">{t("medium")}</TabsTrigger>
-                      <TabsTrigger value="hard">{t("hard")}</TabsTrigger>
+                      <TabsTrigger value="easy">
+                        {t("difficulty.easy")}
+                      </TabsTrigger>
+                      <TabsTrigger value="medium">
+                        {t("difficulty.medium")}
+                      </TabsTrigger>
+                      <TabsTrigger value="hard">
+                        {t("difficulty.hard")}
+                      </TabsTrigger>
                     </TabsList>
                   </Tabs>
 
@@ -337,10 +360,8 @@ function Play() {
                     }
                   >
                     <TabsList>
-                      <TabsTrigger value="3min">
-                        {t("threeMinutes")}
-                      </TabsTrigger>
-                      <TabsTrigger value="10min">{t("tenMinutes")}</TabsTrigger>
+                      <TabsTrigger value="3min">{t("3min")}</TabsTrigger>
+                      <TabsTrigger value="10min">{t("10min")}</TabsTrigger>
                       <TabsTrigger value="no-time">{t("noTime")}</TabsTrigger>
                     </TabsList>
                   </Tabs>
@@ -366,7 +387,7 @@ function Play() {
                   </Tabs>
 
                   <div className="flex items-center space-x-2">
-                    <Button onClick={handleNewGame}>{t("start")}</Button>
+                    <Button onClick={handleNewGame}>{t("play")}</Button>
                   </div>
                   <p className="text-xs mt-8">
                     {t("createdBy")} @bayarjargal.jr
@@ -376,8 +397,6 @@ function Play() {
             </DialogHeader>
           </DialogContent>
         </Dialog>
-
-        <Separator />
       </div>
     </div>
   );
