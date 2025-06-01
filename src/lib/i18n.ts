@@ -8,7 +8,8 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         title: "Chess AI",
-        welcomeMessage: "Hello, try to beat the AI in a game of chess",
+        description: "Smart, Strategic, and Always Ready to Play!",
+        welcomeMessage: "Meet Your New Chess Companion",
         play: "Play",
         settings: "Settings",
         about: "About",

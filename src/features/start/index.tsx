@@ -17,7 +17,7 @@ export default function Start() {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-4">
       <img src="/bq.png" alt={t("logoAlt")} className="w-32 h-32 mb-6" />
-      <h1 className="text-4xl font-bold">{t("welcomeMessage")}</h1>
+      <h1 className="text-4xl w-100 text-center font-bold">{t("welcomeMessage")}</h1>
       <p className="text-sm mb-4">{t("description")}</p>
       <div>
         <Tabs
